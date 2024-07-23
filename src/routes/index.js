@@ -2,9 +2,11 @@ const { Router } = require("express");//requiriu o express e pegou apenas a fun√
 
 const usersRoutes = require("./users.routes")//requiriu as rotas de usuario e definiu elas como uma const usersRoutes
 const notesRoutes = require("./notes.routes")
+const sessionsRoutes = require("./sessions.routes")
 
 const routes = Router();//executou a fun√ßao Router para que ela funcione
 
+routes.use("/sessions", sessionsRoutes)
 routes.use("/users", usersRoutes)//definiu na route que quando o path for /users ele usara as rotas de usuario
 routes.use("/notes", notesRoutes)
 

@@ -21,11 +21,11 @@ class UsersController {
     });
 
     return response.status(201).json();
-  }
+  };
 
   async update(request, response) {
     const { name, email, password, old_password } = request.body;
-    const { id } = request.params;
+    const id = request.user.id
 
     const user = await knex('users').where({ id }).first();
 
@@ -63,7 +63,26 @@ class UsersController {
     await knex('users').where({ id }).update(updatedUser);
 
     return response.json();
-  }
+  };
+
+  async show(request, response) {
+    const id = request.user.id
+
+    const user = await knex("users").where({id}).first();
+
+    if(!user){
+      return response.json("usuário não existe")
+    }
+
+    return response.json({ user })
+  };
+
+  async delete(request, response) {
+    const id = request.user.id
+
+    await knex("users").where({ id }).delete();
+    return response.json()
+  };
 }
 
 module.exports = UsersController;

@@ -1,14 +1,18 @@
 require("express-async-errors")//importaçao do async erros para poder capturar erros
 
+const cors = require("cors")
+const uploadConfigs = require("./configs/upload");
 const AppError = require("./utils/AppError")//requerindo 
 
 const express = require('express');//chamou a biblioteca express
 
-const routes = require("./routes")//requiriu a routes e a transformou em uma const
+const routes = require("./routes");//requiriu a routes e a transformou em uma const
 
 const app = express();//executou a biblioteca express para que ela possa ser usada
 app.use(express.json());//definiu que todos os dados enviados ou recebidos serao em json 
+app.use(cors());
 
+app.use("/files", express.static(uploadConfigs.UPLOADS_FOLDER))
 app.use(routes);//definiu a rota principal como routes
 
 app.use(( error, request, response, next)=>{
