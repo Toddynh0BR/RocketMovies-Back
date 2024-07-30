@@ -31,7 +31,7 @@ app.use(( error, request, response, next)=>{
  })
 })//funçao geral que vai receber o erro e verificar se foi do usuario ou do servidor e avisa-los
 
-const PORT = 4444;//definil a porta do servidor
+const PORT = process.env.PORT || 3000;//definil a porta do servidor
 app.listen(PORT, () => console.log(`serve is running on port ${PORT}`));//mensagem para saber que o servidor esta ativo
 
 
