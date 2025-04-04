@@ -12,6 +12,14 @@ const app = express();//executou a biblioteca express para que ela possa ser usa
 app.use(express.json());//definiu que todos os dados enviados ou recebidos serao em json 
 app.use(cors());
 
+app.get("/health", (req, res) => {
+    return res.json({ message: "server active" });
+});
+
+app.head("/health", (req, res) => {
+   return res.json({ message: "server active" });
+});
+
 app.use("/files", express.static(uploadConfigs.UPLOADS_FOLDER))
 app.use(routes);//definiu a rota principal como routes
 
